@@ -31,5 +31,18 @@ class Solution:
         # _______________________________________________________________
         # Space Complexity: O(n)
         # Time Complexity: O(m * n), where m is the number of words and n is the length of the word.
+        
+        from collections import defaultdict
 
-        # TODO: Implement Approach 2
+        anagrams = defaultdict(list)
+
+        for word in strs:
+            alphabet = [0] * 26 # alphabet has 26 letter (only lower case)
+            for letter in word:
+                letter_position = ord(letter)-ord('a') # z-a=25 
+                alphabet[letter_position] += 1
+
+            temp = tuple(alphabet) # mutable list can't be a dict key 
+            anagrams[temp].append(word)
+            
+        return list(anagrams.values())
